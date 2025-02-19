@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { BASE_URL } from "../config";
 
@@ -7,10 +7,13 @@ const StudyPage = () => {
   const location = useLocation();
   const userId = location.state?.userId;
   const username = location.state?.username;
-
+   const navigate = useNavigate();
   const [flashcards, setFlashcards] = useState([]);
   const [flippedIndex, setFlippedIndex] = useState(null); // Track flipped card index
-
+  if (!userId || !username) {
+    navigate("/");
+    return null;
+  }
   useEffect(() => {
     const fetchFlashcards = async () => {
       try {

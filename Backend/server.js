@@ -6,7 +6,24 @@ const cors = require("cors");
 require("dotenv").config();
 const app = express();
 app.use(express.json());
-app.use(cors());
+const allowedOrigins = [
+  'http://localhost:5173', // Local development
+  'https://task-management-system2.vercel.app' // Deployed frontend
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (allowedOrigins.includes(origin) || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true // Allow cookies if needed
+  })
+);
+
 
 // Connect to MongoDB Atlas
 mongoose.connect(process.env.MONGO_URI, {

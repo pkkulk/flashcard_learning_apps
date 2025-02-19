@@ -70,6 +70,7 @@ router.post('/fetch',async(req,res)=>{
     if (!userId) {
       return res.status(400).json({ message: "User ID is required" });
     }
+    console.log("data of flashcard hasbeen send")
     const result = await Flashcard.find({user : userId})
     res.status(200).json(result);
   }catch(error){
