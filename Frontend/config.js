@@ -1,1 +1,1 @@
-export const BASE_URL =  "https://flashcard-learning-apps-second-backend-8j9k2o8d7.vercel.app"
+export const BASE_URL =  "https://flashcard-learning-apps-backend.vercel.app"
