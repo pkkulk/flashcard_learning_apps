@@ -1,14 +1,25 @@
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const AddFlashcard = () => {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [category, setCategory] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const level = 1;
+  const userId = location.state?.userId;
+  const username = location.state?.username;
 
+  // Redirect if accessed directly
+  if (!userId || !username) {
+    navigate("/");
+    return null;
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const flashcardData = { question, answer, category };
+    const flashcardData = { question, answer, category,level,userId };
 
     try {
       const response = await fetch("http://localhost:5000/api/flashcard/add", {
@@ -35,6 +46,8 @@ const AddFlashcard = () => {
   };
 
   return (
+    <>
+    <h1>{userId}{username}</h1>
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
         <h2 className="text-2xl font-semibold text-center text-gray-700 mb-4">Add Flashcard</h2>
@@ -78,6 +91,7 @@ const AddFlashcard = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 
