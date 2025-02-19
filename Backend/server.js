@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 const allowedOrigins = [
   'http://localhost:5173', // Local development
-  'https://flashcard-learning-apps-second.vercel.app' // Deployed frontend
+  'https://flashcard-learning-apps.vercel.app' // Deployed frontend
 ];
 
 app.use(
