@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-
+import { BASE_URL } from "../config";
 const AddFlashcard = () => {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
@@ -22,7 +22,7 @@ const AddFlashcard = () => {
     const flashcardData = { question, answer, category,level,userId };
 
     try {
-      const response = await fetch("http://localhost:5000/api/flashcard/add", {
+      const response = await fetch(`${BASE_URL}/api/flashcard/add`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
